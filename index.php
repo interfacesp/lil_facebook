@@ -18,6 +18,7 @@
          * Vérification de l'utilisateur
          */
         $isFound = false; //connu
+        $connectedUser;
 
         if(isset($_POST['username'], $_POST['password'])){
 
@@ -25,24 +26,29 @@
             $pass_word = $_POST['password'];
 
             $sqlQuery = "
-                
-
+                SELECT *
+                FROM members
+                WHERE username = :param_username AND password = :param_password 
             ";
+
+            $statement = $mysqlClient->prepare($sqlQuery); 
+            $statement->execute(array("param_username" => $user_name, "param_password" => $pass_word));
+            $result = $statement->fetchAll(); 
          
+            if($result){
+                $isFound = true;
+                $connectedUser = $result[0]['username'];
+                $email = $result[0]['email'];
 
-
-
+            }
             
 
         }
 
         if($isFound){
-            echo "Bienvenue sur page d'accueil !";
+            echo "Bienvenue sur page d'accueil ! $connectedUser ($email)";
         }else {
             include_once('views/login.php');
-
-
-
 
         }
 
