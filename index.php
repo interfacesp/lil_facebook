@@ -1,5 +1,5 @@
 <?php 
-    include_once 'src/db-facebook.php';
+    include_once 'src/db-insta.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook</title>
+    <title>Little Instagram</title>
     <link rel="stylesheet" href="assets/style.css">
 
 </head>
@@ -30,12 +30,21 @@
 
             $sqlQuery = "
                 SELECT *
-                FROM members
-                WHERE username = :param_username AND password = :param_password 
+                FROM insta_members
+                WHERE username = :param_username AND passwd = :param_password 
             ";
 
             $statement = $mysqlClient->prepare($sqlQuery); 
             $statement->execute(array("param_username" => $user_name, "param_password" => $pass_word));
+            
+    
+            //   SELECT *
+            //   FROM members
+            //   WHERE username = 'tata' AND password = '1234Soleil' 
+              
+                
+
+            
             $result = $statement->fetchAll(); 
          
             if($result){
@@ -47,7 +56,7 @@
         }
 
         if($isFound){
-            echo "Bienvenue sur page d'accueil ! $connectedUser ($email)";
+            echo "Bienvenue sur page d'accueil sur Instagram ! $connectedUser ($email)";
         }else {
 
 

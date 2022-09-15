@@ -3,7 +3,7 @@
         $mysqlClient = new PDO(
             sprintf('mysql:host=%s;dbname=%s;port=%s', 
             "localhost",
-            "facebook",
+            "instagram",
             3306),
             "root",
             "root"
